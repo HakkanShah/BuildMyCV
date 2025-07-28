@@ -10,13 +10,13 @@ export function AppFooter() {
             rel="noopener noreferrer"
             className="underline underline-offset-4 hover:text-primary"
           >
-            @yourgithub
+            @HakkanShah
           </a>{" "}
           | © 2025 BuildMyCV
         </p>
         <div className="mt-2 sm:mt-0 flex gap-4">
           <a
-            href="https://github.com/yourgithub"
+            href="https://github.com/HakkanShah"
             target="_blank"
             rel="noopener noreferrer"
             className="opacity-70 hover:opacity-100 transition"
