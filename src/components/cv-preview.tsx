@@ -3,6 +3,18 @@ import type { CVData } from '@/lib/types';
 import ModernTemplate from './templates/modern-template';
 import ClassicTemplate from './templates/classic-template';
 import { Card, CardContent } from './ui/card';
+const CvPreview = React.forwardRef<HTMLDivElement, CvPreviewProps>(({ cvData, template }, ref) => {
+  return (
+    <Card className="w-full print-container"> {/* <--- Add print-container class here */}
+      <CardContent className="p-0">
+        <div ref={ref} className="bg-white text-black">
+          {template === 'modern' && <ModernTemplate cvData={cvData} />}
+          {template === 'classic' && <ClassicTemplate cvData={cvData} />}
+        </div>
+      </CardContent>
+    </Card>
+  );
+});
 
 interface CvPreviewProps {
   cvData: CVData;
