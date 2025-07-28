@@ -25,25 +25,11 @@ export default function CvContainer() {
     localStorage.setItem('cv-template', newTemplate);
   };
 
-  // --- Start of Changed Code ---
-
   const handlePrint = useReactToPrint({
     content: () => previewRef.current,
     documentTitle: 'My-CV',
-    // Add a small delay to ensure the ref is ready
-    onBeforeGetContent: () => {
-      return new Promise((resolve: any) => {
-        setTimeout(() => resolve(), 500);
-      });
-    },
-    onAfterPrint: () => {
-      console.log('CV Printed/Saved');
-    },
-    // Recommended for cleanup
     removeAfterPrint: true,
   });
-
-  // --- End of Changed Code ---
 
   const { cvData, isLoaded, saveData, ...cvActions } = useCvData({ onPrint: handlePrint });
 
@@ -66,7 +52,13 @@ export default function CvContainer() {
       </div>
       <div>
         <TemplateSelector value={template} onValueChange={handleTemplateChange} />
-        <CvPreview ref={previewRef} cvData={cvData} template={template} />
+        {/*
+          The ref is now on a simple div that wraps the preview component.
+          This is a more stable pattern for react-to-print.
+        */}
+        <div ref={previewRef}>
+          <CvPreview cvData={cvData} template={template} />
+        </div>
       </div>
     </div>
   );
