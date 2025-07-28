@@ -25,11 +25,25 @@ export default function CvContainer() {
     localStorage.setItem('cv-template', newTemplate);
   };
 
+  // --- Start of Changed Code ---
+
   const handlePrint = useReactToPrint({
     content: () => previewRef.current,
     documentTitle: 'My-CV',
-    onAfterPrint: () => console.log('printed'),
+    // Add a small delay to ensure the ref is ready
+    onBeforeGetContent: () => {
+      return new Promise((resolve: any) => {
+        setTimeout(() => resolve(), 500);
+      });
+    },
+    onAfterPrint: () => {
+      console.log('CV Printed/Saved');
+    },
+    // Recommended for cleanup
+    removeAfterPrint: true,
   });
+
+  // --- End of Changed Code ---
 
   const { cvData, isLoaded, saveData, ...cvActions } = useCvData({ onPrint: handlePrint });
 
