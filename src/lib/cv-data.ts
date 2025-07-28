@@ -5,7 +5,7 @@ export const defaultCvData: CVData = {
     name: 'Hakkan Shah',
     email: 'Hakkan@example.com',
     phone: '+91690690690',
-    website: 'alexdoe.dev',
+    website: 'hakkan.dev',
     location: 'Kokata(W.B.), India',
     summary:
       'Innovative and deadline-driven Software Engineer with 5+ years of experience designing and developing user-centered applications from initial concept to final, polished deliverable.',
@@ -15,10 +15,10 @@ export const defaultCvData: CVData = {
     {
       id: 'edu-1',
       institution: 'State University',
-      degree: 'B.S. in Computer Science',
-      startDate: '2015',
-      endDate: '2019',
-      details: 'Graduated with honors, GPA: 3.8/4.0',
+      degree: 'B.Tech in Computer Science',
+      startDate: '2022',
+      endDate: '2026',
+      details: 'Graduated with honors, GPA: 6.9/10',
     },
   ],
   experience: [
@@ -26,7 +26,7 @@ export const defaultCvData: CVData = {
       id: 'exp-1',
       company: 'Tech Solutions Inc.',
       role: 'Senior Software Engineer',
-      startDate: '2021',
+      startDate: '2025',
       endDate: 'Present',
       description:
         '- Lead development of a new microservices-based architecture, improving system scalability by 40%.\n- Mentor junior engineers and conduct code reviews to maintain high-quality code standards.',
@@ -35,8 +35,8 @@ export const defaultCvData: CVData = {
       id: 'exp-2',
       company: 'Innovate LLC',
       role: 'Software Engineer',
-      startDate: '2019',
-      endDate: '2021',
+      startDate: '2021',
+      endDate: '2025',
       description:
         '- Developed and maintained features for a large-scale e-commerce platform using React and Node.js.\n- Collaborated with product managers and designers to translate requirements into technical solutions.',
     },
