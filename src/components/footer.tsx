@@ -11,8 +11,9 @@ export function AppFooter() {
             className="underline underline-offset-4 hover:text-primary"
           >
             @HakkanShah
-          </a>{" "}
-          <br>© 2025 BuildMyCV
+          </a>
+          <br />
+          © 2025 BuildMyCV
         </p>
         <div className="mt-2 sm:mt-0 flex gap-4">
           <a
