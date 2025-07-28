@@ -12,7 +12,7 @@ export function AppFooter() {
           >
             @HakkanShah
           </a>{" "}
-          | © 2025 BuildMyCV
+          <be>© 2025 BuildMyCV
         </p>
         <div className="mt-2 sm:mt-0 flex gap-4">
           <a
