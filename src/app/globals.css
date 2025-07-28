@@ -73,3 +73,29 @@
     @apply bg-card/60 backdrop-blur-lg border border-border/20 shadow-lg;
   }
 }
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Hide the form and other UI elements when printing */
+  .lg\\:sticky, footer, header {
+    display: none !important;
+  }
+
+  /* Ensure the CV preview takes up the full page */
+  main > div > div:last-child {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Reset card styles for the preview container */
+  .print-container, .print-container > div {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+}
+
