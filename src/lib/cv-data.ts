@@ -2,11 +2,11 @@ import type { CVData } from './types';
 
 export const defaultCvData: CVData = {
   personal: {
-    name: 'Alex Doe',
-    email: 'alex.doe@example.com',
-    phone: '123-456-7890',
+    name: 'Hakkan Shah',
+    email: 'Hakkan@example.com',
+    phone: '+91690690690',
     website: 'alexdoe.dev',
-    location: 'San Francisco, CA',
+    location: 'Kokata(W.B.), India',
     summary:
       'Innovative and deadline-driven Software Engineer with 5+ years of experience designing and developing user-centered applications from initial concept to final, polished deliverable.',
     photo: '',
