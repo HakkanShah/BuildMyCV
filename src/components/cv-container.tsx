@@ -31,6 +31,8 @@ export default function CvContainer() {
     removeAfterPrint: true,
   });
 
+  console.log("handlePrint function created"); // Added console log
+
   const { cvData, isLoaded, saveData, ...cvActions } = useCvData({ onPrint: handlePrint });
 
   if (!isLoaded) {
