@@ -1,21 +1,33 @@
-'use client'
+"use client";
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from "./ui/button";
 
-type TemplateSelectorProps = {
-    onValueChange: (value: string) => void;
-    value: string;
+interface TemplateSelectorProps {
+  selectedTemplate: "modern" | "classic";
+  onSelect: (template: "modern" | "classic") => void;
 }
 
-export default function TemplateSelector({ onValueChange, value }: TemplateSelectorProps) {
-    return (
-        <div className="mb-4 flex justify-center">
-            <Tabs value={value} onValueChange={onValueChange} className="w-auto">
-                <TabsList className="bg-primary/10">
-                    <TabsTrigger value="modern">Modern</TabsTrigger>
-                    <TabsTrigger value="classic">Classic</TabsTrigger>
-                </TabsList>
-            </Tabs>
-        </div>
-    );
+// The "export" keyword was likely missing.
+export function TemplateSelector({
+  selectedTemplate,
+  onSelect,
+}: TemplateSelectorProps) {
+  return (
+    <div className="flex gap-2">
+      <Button
+        variant={selectedTemplate === "modern" ? "default" : "outline"}
+        onClick={() => onSelect("modern")}
+        className="w-full"
+      >
+        Modern
+      </Button>
+      <Button
+        variant={selectedTemplate === "classic" ? "default" : "outline"}
+        onClick={() => onSelect("classic")}
+        className="w-full"
+      >
+        Classic
+      </Button>
+    </div>
+  );
 }
