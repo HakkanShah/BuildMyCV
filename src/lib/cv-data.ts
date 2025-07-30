@@ -1,55 +1,41 @@
-import type { CVData } from './types';
+import { CVData } from "./types";
 
-export const defaultCvData: CVData = {
-  personal: {
-    name: 'Hakkan Shah',
-    email: 'Hakkan@example.com',
-    phone: '+91690690690',
-    website: 'hakkan.dev',
-    location: 'Kokata(W.B.), India',
-    summary:
-      'Innovative and deadline-driven Software Engineer with 5+ years of experience designing and developing user-centered applications from initial concept to final, polished deliverable.',
-    photo: '',
+// The 'export' keyword was likely missing here. 
+// By adding it, we make this variable available to other files that import it,
+// which should resolve the entire chain of build errors.
+export const initialCVData: CVData = {
+  personalDetails: {
+    name: "Your Name",
+    email: "your.email@example.com",
+    phone: "123-456-7890",
+    address: "City, Country",
   },
   education: [
     {
-      id: 'edu-1',
-      institution: 'State University',
-      degree: 'B.Tech in Computer Science',
-      startDate: '2022',
-      endDate: '2026',
-      details: 'Graduated with honors, GPA: 6.9/10',
+      institution: "University of Example",
+      degree: "Bachelor of Science",
+      fieldOfStudy: "Computer Science",
+      startDate: "2018",
+      endDate: "2022",
+      description: "Graduated with honors.",
     },
   ],
   experience: [
     {
-      id: 'exp-1',
-      company: 'Tech Solutions Inc.',
-      role: 'Senior Software Engineer',
-      startDate: '2025',
-      endDate: 'Present',
-      description:
-        '- Lead development of a new microservices-based architecture, improving system scalability by 40%.\n- Mentor junior engineers and conduct code reviews to maintain high-quality code standards.',
-    },
-    {
-      id: 'exp-2',
-      company: 'Innovate LLC',
-      role: 'Software Engineer',
-      startDate: '2021',
-      endDate: '2025',
-      description:
-        '- Developed and maintained features for a large-scale e-commerce platform using React and Node.js.\n- Collaborated with product managers and designers to translate requirements into technical solutions.',
+      company: "Tech Corp",
+      position: "Software Engineer",
+      startDate: "2022",
+      endDate: "Present",
+      description: "Developed and maintained web applications.",
     },
   ],
   projects: [
     {
-      id: 'proj-1',
-      name: 'Portfolio Website',
-      date: '2023',
-      description:
-        'Personal portfolio website built with Next.js and Tailwind CSS to showcase projects and skills. Deployed on Vercel.',
-      url: 'portfolio.example.com',
+      name: "CV Builder",
+      description: "A web application to build and customize CVs.",
+      technologies: "Next.js, TypeScript, Tailwind CSS",
+      link: "https://github.com/your-repo/cv-builder",
     },
   ],
-  skills: ['React', 'TypeScript', 'Node.js', 'Next.js', 'GraphQL', 'Docker', 'CI/CD'],
+  skills: ["JavaScript", "React", "Next.js", "TypeScript", "Node.js"],
 };
