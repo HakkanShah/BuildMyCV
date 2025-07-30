@@ -27,7 +27,9 @@ const CVPreview = dynamic(
   }
 );
 
-export function CVContainer() {
+// Changed to a default export to match how it's imported in other files (e.g., page.tsx).
+// This resolves the "does not contain a default export" error during deployment.
+export default function CVContainer() {
   const { data, setData } = useCVData();
   const [template, setTemplate] = useState<"modern" | "classic">("modern");
 
