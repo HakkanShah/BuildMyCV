@@ -5,6 +5,7 @@ import { AppHeader } from '@/components/header';
 import { AppFooter } from '@/components/footer';
 import { Toaster } from '@/components/ui/toaster';
 
+
 export const metadata: Metadata = {
   title: 'BuildMyCV',
   description: 'Create and customize your professional resume with ease.',
