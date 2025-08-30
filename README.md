@@ -25,6 +25,7 @@ BuildMyCV allows users to:
 ## 🌟 Features
 
 - ⚡ **Quick Resume Builder** – No complex steps, build your CV in minutes
+- 👁️ **Live Preview** - Love preview of all changes made
 - 🎨 **Customizable Templates** – Styled using Tailwind CSS
 - 🤖 **AI Integration** – Gemini API improves CV content for better impact
 - 📱 **Responsive UI** – Works seamlessly across devices
