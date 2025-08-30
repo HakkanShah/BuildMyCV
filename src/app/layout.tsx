@@ -7,7 +7,17 @@ import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'BuildMyCV',
-  description: 'Create and customize your professional resume with ease.',
+  description: 'Create and customize your professional resume with ease. Perfect for B.Tech students looking for a last-minute CV builder.',
+  keywords: [
+    'resume builder',
+    'CV maker',
+    'last minute resume',
+    'B.Tech resume',
+    'student CV builder',
+    'easy CV creation',
+    'professional resume tool'
+  ],
+  authors: [{ name: 'Hakkan Shah' }],
 };
 
 export default function RootLayout({
@@ -20,7 +30,10 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="font-body antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
