@@ -41,3 +41,4 @@ export type CVData = {
   projects: Project[];
   skills: string[];
 };
+
