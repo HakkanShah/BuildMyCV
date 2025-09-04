@@ -42,3 +42,4 @@ export type CVData = {
   skills: string[];
 };
 
+
