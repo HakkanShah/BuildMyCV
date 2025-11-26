@@ -3,7 +3,6 @@
 A Last Minute Resume Builder built with Next.js, TypeScript, Tailwind CSS, and Gemini API.
 This project is designed especially for B.Tech students and professionals who need to create or improve their CV quickly and effortlessly.
 
-
 ---
 
 ## 🚀 Overview
