@@ -1,66 +1,132 @@
 'use client';
 
 import type { Experience } from '@/lib/types';
-import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Briefcase, PlusCircle, Trash2 } from 'lucide-react';
+import { RichTextarea } from '@/components/ui/rich-textarea';
+import { PlusCircle, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 type ExperienceFormProps = {
   experience: Experience[];
   updateExperience: (id: string, field: keyof Experience, value: string) => void;
   addExperience: () => void;
   removeExperience: (id: string) => void;
+  reorderExperience?: (startIndex: number, endIndex: number) => void;
 };
 
-export default function ExperienceForm({ experience, updateExperience, addExperience, removeExperience }: ExperienceFormProps) {
+export default function ExperienceForm({
+  experience,
+  updateExperience,
+  addExperience,
+  removeExperience,
+  reorderExperience
+}: ExperienceFormProps) {
   const countWords = (str: string | undefined) => {
     if (!str) return 0;
     return str.trim().split(/\s+/).filter(Boolean).length;
   };
 
+  const moveUp = (index: number) => {
+    if (index > 0 && reorderExperience) {
+      reorderExperience(index, index - 1);
+    }
+  };
+
+  const moveDown = (index: number) => {
+    if (index < experience.length - 1 && reorderExperience) {
+      reorderExperience(index, index + 1);
+    }
+  };
+
   return (
-    <AccordionItem value="item-2">
-      <AccordionTrigger className="font-semibold"><Briefcase className="mr-2" /> Experience</AccordionTrigger>
-      <AccordionContent>
-        <div className="space-y-4">
-          {experience.map((exp) => (
-            <div key={exp.id} className="p-4 border rounded-md relative space-y-4">
-              <Button variant="ghost" size="icon" className="absolute top-2 right-2 h-7 w-7 text-muted-foreground hover:text-destructive" onClick={() => removeExperience(exp.id)}><Trash2 size={16} /></Button>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor={`company-${exp.id}`}>Company</Label>
-                  <Input id={`company-${exp.id}`} value={exp.company} onChange={(e) => updateExperience(exp.id, 'company', e.target.value)} />
-                </div>
-                <div>
-                  <Label htmlFor={`role-${exp.id}`}>Role</Label>
-                  <Input id={`role-${exp.id}`} value={exp.role} onChange={(e) => updateExperience(exp.id, 'role', e.target.value)} />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor={`start-date-exp-${exp.id}`}>Start Date</Label>
-                  <Input id={`start-date-exp-${exp.id}`} value={exp.startDate} onChange={(e) => updateExperience(exp.id, 'startDate', e.target.value)} />
-                </div>
-                <div>
-                  <Label htmlFor={`end-date-exp-${exp.id}`}>End Date</Label>
-                  <Input id={`end-date-exp-${exp.id}`} value={exp.endDate} onChange={(e) => updateExperience(exp.id, 'endDate', e.target.value)} />
-                </div>
-              </div>
-              <div>
-                <Label htmlFor={`description-exp-${exp.id}`}>Description</Label>
-                <Textarea id={`description-exp-${exp.id}`} value={exp.description} onChange={(e) => updateExperience(exp.id, 'description', e.target.value)} placeholder="Describe your responsibilities and achievements..." />
-                <p className="text-xs text-muted-foreground text-right mt-1">{countWords(exp.description)} words</p>
-              </div>
-            </div>
-          ))}
-          <Button variant="outline" onClick={addExperience} className="w-full">
+    <div className="space-y-6">
+      {experience.length === 0 && (
+        <div className="text-center py-12 border-2 border-dashed rounded-xl bg-muted/30">
+          <p className="text-muted-foreground mb-4">No experience added yet.</p>
+          <Button variant="outline" onClick={addExperience}>
             <PlusCircle className="mr-2 h-4 w-4" /> Add Experience
           </Button>
         </div>
-      </AccordionContent>
-    </AccordionItem>
+      )}
+
+      {experience.map((exp, index) => (
+        <div key={exp.id} className="p-6 border rounded-xl relative space-y-6 bg-card shadow-sm animate-fade-in group">
+          <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            {reorderExperience && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  onClick={() => moveUp(index)}
+                  disabled={index === 0}
+                  title="Move Up"
+                >
+                  <ArrowUp size={16} />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  onClick={() => moveDown(index)}
+                  disabled={index === experience.length - 1}
+                  title="Move Down"
+                >
+                  <ArrowDown size={16} />
+                </Button>
+              </>
+            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 text-muted-foreground hover:text-destructive"
+              onClick={() => removeExperience(exp.id)}
+              title="Remove"
+            >
+              <Trash2 size={16} />
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor={`company-${exp.id}`}>Company</Label>
+              <Input id={`company-${exp.id}`} value={exp.company} onChange={(e) => updateExperience(exp.id, 'company', e.target.value)} placeholder="e.g. Google" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor={`role-${exp.id}`}>Role</Label>
+              <Input id={`role-${exp.id}`} value={exp.role} onChange={(e) => updateExperience(exp.id, 'role', e.target.value)} placeholder="e.g. Senior Developer" />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor={`start-date-exp-${exp.id}`}>Start Date</Label>
+              <Input id={`start-date-exp-${exp.id}`} value={exp.startDate} onChange={(e) => updateExperience(exp.id, 'startDate', e.target.value)} placeholder="e.g. Jan 2020" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor={`end-date-exp-${exp.id}`}>End Date</Label>
+              <Input id={`end-date-exp-${exp.id}`} value={exp.endDate} onChange={(e) => updateExperience(exp.id, 'endDate', e.target.value)} placeholder="e.g. Present" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor={`description-exp-${exp.id}`}>Description</Label>
+            <RichTextarea
+              id={`description-exp-${exp.id}`}
+              value={exp.description}
+              onChange={(e) => updateExperience(exp.id, 'description', e.target.value)}
+              placeholder="Describe your responsibilities and achievements..."
+            />
+            <p className="text-xs text-muted-foreground text-right">{countWords(exp.description)} words</p>
+          </div>
+        </div>
+      ))}
+
+      {experience.length > 0 && (
+        <Button variant="outline" onClick={addExperience} className="w-full py-6 border-dashed">
+          <PlusCircle className="mr-2 h-4 w-4" /> Add Another Position
+        </Button>
+      )}
+    </div>
   );
 }

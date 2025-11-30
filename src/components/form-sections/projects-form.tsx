@@ -1,60 +1,125 @@
 'use client';
 
 import type { Project } from '@/lib/types';
-import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Lightbulb, PlusCircle, Trash2 } from 'lucide-react';
+import { RichTextarea } from '@/components/ui/rich-textarea';
+import { PlusCircle, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
 
 type ProjectsFormProps = {
   projects: Project[];
   updateProject: (id: string, field: keyof Project, value: string) => void;
   addProject: () => void;
   removeProject: (id: string) => void;
+  reorderProject?: (startIndex: number, endIndex: number) => void;
 };
 
-export default function ProjectsForm({ projects, updateProject, addProject, removeProject }: ProjectsFormProps) {
+export default function ProjectsForm({
+  projects,
+  updateProject,
+  addProject,
+  removeProject,
+  reorderProject
+}: ProjectsFormProps) {
   const countWords = (str: string | undefined) => {
     if (!str) return 0;
     return str.trim().split(/\s+/).filter(Boolean).length;
   };
-  
+
+  const moveUp = (index: number) => {
+    if (index > 0 && reorderProject) {
+      reorderProject(index, index - 1);
+    }
+  };
+
+  const moveDown = (index: number) => {
+    if (index < projects.length - 1 && reorderProject) {
+      reorderProject(index, index + 1);
+    }
+  };
+
   return (
-    <AccordionItem value="item-3">
-      <AccordionTrigger className="font-semibold"><Lightbulb className="mr-2" /> Projects</AccordionTrigger>
-      <AccordionContent>
-        <div className="space-y-4">
-          {projects.map((proj) => (
-            <div key={proj.id} className="p-4 border rounded-md relative space-y-4">
-              <Button variant="ghost" size="icon" className="absolute top-2 right-2 h-7 w-7 text-muted-foreground hover:text-destructive" onClick={() => removeProject(proj.id)}><Trash2 size={16} /></Button>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor={`name-${proj.id}`}>Project Name</Label>
-                  <Input id={`name-${proj.id}`} value={proj.name} onChange={(e) => updateProject(proj.id, 'name', e.target.value)} />
-                </div>
-                <div>
-                  <Label htmlFor={`date-${proj.id}`}>Date</Label>
-                  <Input id={`date-${proj.id}`} value={proj.date} onChange={(e) => updateProject(proj.id, 'date', e.target.value)} />
-                </div>
-              </div>
-              <div>
-                <Label htmlFor={`url-${proj.id}`}>URL</Label>
-                <Input id={`url-${proj.id}`} value={proj.url} onChange={(e) => updateProject(proj.id, 'url', e.target.value)} />
-              </div>
-              <div>
-                <Label htmlFor={`description-${proj.id}`}>Description</Label>
-                <Textarea id={`description-${proj.id}`} value={proj.description} onChange={(e) => updateProject(proj.id, 'description', e.target.value)} />
-                 <p className="text-xs text-muted-foreground text-right mt-1">{countWords(proj.description)} words</p>
-              </div>
-            </div>
-          ))}
-          <Button variant="outline" onClick={addProject} className="w-full">
+    <div className="space-y-6">
+      {projects.length === 0 && (
+        <div className="text-center py-12 border-2 border-dashed rounded-xl bg-muted/30">
+          <p className="text-muted-foreground mb-4">No projects added yet.</p>
+          <Button variant="outline" onClick={addProject}>
             <PlusCircle className="mr-2 h-4 w-4" /> Add Project
           </Button>
         </div>
-      </AccordionContent>
-    </AccordionItem>
+      )}
+
+      {projects.map((proj, index) => (
+        <div key={proj.id} className="p-6 border rounded-xl relative space-y-6 bg-card shadow-sm animate-fade-in group">
+          <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            {reorderProject && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  onClick={() => moveUp(index)}
+                  disabled={index === 0}
+                  title="Move Up"
+                >
+                  <ArrowUp size={16} />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  onClick={() => moveDown(index)}
+                  disabled={index === projects.length - 1}
+                  title="Move Down"
+                >
+                  <ArrowDown size={16} />
+                </Button>
+              </>
+            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 text-muted-foreground hover:text-destructive"
+              onClick={() => removeProject(proj.id)}
+              title="Remove"
+            >
+              <Trash2 size={16} />
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor={`name-${proj.id}`}>Project Name</Label>
+              <Input id={`name-${proj.id}`} value={proj.name} onChange={(e) => updateProject(proj.id, 'name', e.target.value)} placeholder="e.g. Portfolio Website" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor={`date-${proj.id}`}>Date</Label>
+              <Input id={`date-${proj.id}`} value={proj.date} onChange={(e) => updateProject(proj.id, 'date', e.target.value)} placeholder="e.g. 2023" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor={`url-${proj.id}`}>URL</Label>
+            <Input id={`url-${proj.id}`} value={proj.url} onChange={(e) => updateProject(proj.id, 'url', e.target.value)} placeholder="e.g. https://github.com/..." />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor={`description-${proj.id}`}>Description</Label>
+            <RichTextarea
+              id={`description-${proj.id}`}
+              value={proj.description}
+              onChange={(e) => updateProject(proj.id, 'description', e.target.value)}
+              placeholder="Describe the project and technologies used..."
+            />
+            <p className="text-xs text-muted-foreground text-right">{countWords(proj.description)} words</p>
+          </div>
+        </div>
+      ))}
+
+      {projects.length > 0 && (
+        <Button variant="outline" onClick={addProject} className="w-full py-6 border-dashed">
+          <PlusCircle className="mr-2 h-4 w-4" /> Add Another Project
+        </Button>
+      )}
+    </div>
   );
 }

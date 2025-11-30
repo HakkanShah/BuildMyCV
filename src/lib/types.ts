@@ -34,12 +34,18 @@ export interface Project {
   url: string;
 }
 
+export interface Settings {
+  themeColor: string;
+  fontFamily: string;
+}
+
 export type CVData = {
   personal: PersonalDetails;
   education: Education[];
   experience: Experience[];
   projects: Project[];
   skills: string[];
+  settings: Settings;
 };
 
 

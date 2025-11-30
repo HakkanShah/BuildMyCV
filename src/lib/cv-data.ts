@@ -1,29 +1,29 @@
 import { CVData } from "./types";
 
-// The 'export' keyword was likely missing here. 
-// By adding it, we make this variable available to other files that import it,
-// which should resolve the entire chain of build errors.
 export const initialCVData: CVData = {
-  personalDetails: {
+  personal: {
     name: "Your Name",
     email: "your.email@example.com",
     phone: "123-456-7890",
-    address: "City, Country",
+    website: "https://yourwebsite.com",
+    location: "City, Country",
+    summary: "A brief summary about yourself.",
   },
   education: [
     {
+      id: "1",
       institution: "University of Example",
       degree: "Bachelor of Science",
-      fieldOfStudy: "Computer Science",
       startDate: "2018",
       endDate: "2022",
-      description: "Graduated with honors.",
+      details: "Graduated with honors.",
     },
   ],
   experience: [
     {
+      id: "1",
       company: "Tech Corp",
-      position: "Software Engineer",
+      role: "Software Engineer",
       startDate: "2022",
       endDate: "Present",
       description: "Developed and maintained web applications.",
@@ -31,11 +31,16 @@ export const initialCVData: CVData = {
   ],
   projects: [
     {
+      id: "1",
       name: "CV Builder",
+      date: "2023",
       description: "A web application to build and customize CVs.",
-      technologies: "Next.js, TypeScript, Tailwind CSS",
-      link: "https://github.com/your-repo/cv-builder",
+      url: "https://github.com/your-repo/cv-builder",
     },
   ],
   skills: ["JavaScript", "React", "Next.js", "TypeScript", "Node.js"],
+  settings: {
+    themeColor: "#3b82f6", // Default blue
+    fontFamily: "sans",
+  },
 };
