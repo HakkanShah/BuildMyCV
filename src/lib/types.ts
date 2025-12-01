@@ -6,6 +6,8 @@ export interface PersonalDetails {
   location: string;
   summary: string;
   photo?: string;
+  linkedin?: string;
+  github?: string;
 }
 
 export interface Education {

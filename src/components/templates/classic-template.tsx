@@ -14,6 +14,8 @@ export function ClassicTemplate({ data }: { data: CVData }) {
           {personal.phone && <span>• {personal.phone}</span>}
           {personal.location && <span>• {personal.location}</span>}
           {personal.website && <span>• {personal.website}</span>}
+          {personal.linkedin && <span>• {personal.linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//, '')}</span>}
+          {personal.github && <span>• {personal.github.replace(/^https?:\/\/(www\.)?github\.com\//, '')}</span>}
         </div>
       </header>
 

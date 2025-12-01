@@ -37,6 +37,20 @@ export function MinimalistTemplate({ data }: { data: CVData }) {
                         </div>
                     )}
                 </div>
+                <div className="flex flex-wrap gap-6 text-sm text-gray-600 mt-2">
+                    {personal.linkedin && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-semibold">in</span>
+                            <span>{personal.linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//, '')}</span>
+                        </div>
+                    )}
+                    {personal.github && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-semibold">gh</span>
+                            <span>{personal.github.replace(/^https?:\/\/(www\.)?github\.com\//, '')}</span>
+                        </div>
+                    )}
+                </div>
                 {personal.summary && (
                     <p className="mt-6 text-gray-700 leading-relaxed max-w-2xl">{personal.summary}</p>
                 )}

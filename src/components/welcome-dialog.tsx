@@ -28,16 +28,18 @@ export function WelcomeDialog() {
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle className="text-2xl">Welcome to BuildMyCV! 🚀</DialogTitle>
-                    <DialogDescription className="pt-4 space-y-3 text-base text-foreground/80">
-                        <p>
-                            Your ultimate <strong>last-minute resume builder</strong>.
-                        </p>
-                        <p>
-                            Created by <strong>Hakkan</strong> for students like you to craft professional resumes effortlessly.
-                        </p>
-                        <p>
-                            Build, customize, and download in just <strong>one click</strong>!
-                        </p>
+                    <DialogDescription className="pt-4 space-y-3 text-base text-foreground/80" asChild>
+                        <div>
+                            <p>
+                                Your ultimate <strong>last-minute resume builder</strong>.
+                            </p>
+                            <p>
+                                Created by <strong>Hakkan</strong> for students like you to craft professional resumes effortlessly.
+                            </p>
+                            <p>
+                                Build, customize, and download in just <strong>one click</strong>!
+                            </p>
+                        </div>
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mt-4">

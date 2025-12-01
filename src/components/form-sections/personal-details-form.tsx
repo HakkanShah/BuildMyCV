@@ -35,25 +35,25 @@ export default function PersonalDetailsForm({ personal, updatePersonal }: Person
 
   return (
     <div className="space-y-4">
-       <div>
-          <Label htmlFor="photo">Profile Photo</Label>
-          <div className="flex items-center gap-4 mt-2">
-            <Avatar className="h-20 w-20">
-              <AvatarImage src={personal.photo} alt={personal.name} data-ai-hint="profile picture" />
-              <AvatarFallback>
-                {initials || <User className="h-8 w-8" />}
-              </AvatarFallback>
-            </Avatar>
-            <div className='flex-grow'>
-              <Input id="photo" type="file" onChange={handlePhotoChange} accept="image/*" className="file:text-foreground" />
-            </div>
-            {personal.photo && (
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive" onClick={() => updatePersonal('photo', '')}>
-                <Trash2 size={16} />
-              </Button>
-            )}
+      <div>
+        <Label htmlFor="photo">Profile Photo</Label>
+        <div className="flex items-center gap-4 mt-2">
+          <Avatar className="h-20 w-20">
+            <AvatarImage src={personal.photo} alt={personal.name} data-ai-hint="profile picture" />
+            <AvatarFallback>
+              {initials || <User className="h-8 w-8" />}
+            </AvatarFallback>
+          </Avatar>
+          <div className='flex-grow'>
+            <Input id="photo" type="file" onChange={handlePhotoChange} accept="image/*" className="file:text-foreground" />
           </div>
+          {personal.photo && (
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive" onClick={() => updatePersonal('photo', '')}>
+              <Trash2 size={16} />
+            </Button>
+          )}
         </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
@@ -62,7 +62,16 @@ export default function PersonalDetailsForm({ personal, updatePersonal }: Person
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" value={personal.email} onChange={(e) => updatePersonal('email', e.target.value)} />
+          <Input
+            id="email"
+            type="email"
+            value={personal.email}
+            onChange={(e) => updatePersonal('email', e.target.value)}
+            className={personal.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(personal.email) ? "border-red-500 focus-visible:ring-red-500" : ""}
+          />
+          {personal.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(personal.email) && (
+            <p className="text-xs text-red-500 mt-1">Please enter a valid email address</p>
+          )}
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -73,6 +82,26 @@ export default function PersonalDetailsForm({ personal, updatePersonal }: Person
         <div>
           <Label htmlFor="website">Website</Label>
           <Input id="website" value={personal.website} onChange={(e) => updatePersonal('website', e.target.value)} />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="linkedin">LinkedIn</Label>
+          <Input
+            id="linkedin"
+            value={personal.linkedin || ''}
+            onChange={(e) => updatePersonal('linkedin', e.target.value)}
+            placeholder="linkedin.com/in/username"
+          />
+        </div>
+        <div>
+          <Label htmlFor="github">GitHub</Label>
+          <Input
+            id="github"
+            value={personal.github || ''}
+            onChange={(e) => updatePersonal('github', e.target.value)}
+            placeholder="github.com/username"
+          />
         </div>
       </div>
       <div>

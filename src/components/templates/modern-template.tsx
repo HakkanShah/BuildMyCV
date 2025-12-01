@@ -1,5 +1,5 @@
 import { CVData } from "@/lib/types";
-import { Mail, MapPin, Globe, Phone, ExternalLink } from "lucide-react";
+import { Mail, MapPin, Globe, Phone, ExternalLink, Linkedin, Github } from "lucide-react";
 
 export function ModernTemplate({ data }: { data: CVData }) {
   const { personal, education, experience, projects, skills, settings } = data;
@@ -47,7 +47,25 @@ export function ModernTemplate({ data }: { data: CVData }) {
           {personal.website && (
             <div className="flex items-center gap-3 text-slate-300">
               <Globe size={16} className="shrink-0" style={{ color: themeColor }} />
-              <span className="break-all">{personal.website}</span>
+              <a href={personal.website.startsWith('http') ? personal.website : `https://${personal.website}`} target="_blank" rel="noopener noreferrer" className="break-all hover:text-white transition-colors">
+                {personal.website.replace(/^https?:\/\//, '')}
+              </a>
+            </div>
+          )}
+          {personal.linkedin && (
+            <div className="flex items-center gap-3 text-slate-300">
+              <Linkedin size={16} className="shrink-0" style={{ color: themeColor }} />
+              <a href={personal.linkedin.startsWith('http') ? personal.linkedin : `https://${personal.linkedin}`} target="_blank" rel="noopener noreferrer" className="break-all hover:text-white transition-colors">
+                {personal.linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//, '')}
+              </a>
+            </div>
+          )}
+          {personal.github && (
+            <div className="flex items-center gap-3 text-slate-300">
+              <Github size={16} className="shrink-0" style={{ color: themeColor }} />
+              <a href={personal.github.startsWith('http') ? personal.github : `https://${personal.github}`} target="_blank" rel="noopener noreferrer" className="break-all hover:text-white transition-colors">
+                {personal.github.replace(/^https?:\/\/(www\.)?github\.com\//, '')}
+              </a>
             </div>
           )}
         </div>
