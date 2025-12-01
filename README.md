@@ -1,6 +1,6 @@
 # BuildMyCV ✨
 
-A Last Minute Resume Builder built with Next.js, TypeScript, Tailwind CSS, and Gemini API.
+A modern, AI-powered Resume Builder built with Next.js, TypeScript, Tailwind CSS, and OpenRouter API.
 This project is designed especially for B.Tech students and professionals who need to create or improve their CV quickly and effortlessly.
 
 ---
@@ -9,9 +9,10 @@ This project is designed especially for B.Tech students and professionals who ne
 
 BuildMyCV allows users to:
 
-- Create and customize resumes with ease
-- Get AI-powered suggestions (via Gemini API) for better CV content
-- Export as pdf and use resumes instantly — perfect for last-minute job applications
+- Create and customize resumes with intuitive form sections
+- Get **context-aware AI-powered improvements** for personal summaries, work experience, and project descriptions
+- Live preview of your resume with multiple templates
+- Export as PDF and use resumes instantly — perfect for last-minute job applications
 
 ---
 
@@ -24,21 +25,29 @@ BuildMyCV allows users to:
 ## 🌟 Features
 
 - ⚡ **Quick Resume Builder** – No complex steps, build your CV in minutes
-- 👁️ **Live Preview** - Love preview of all changes made
-- 🎨 **Customizable Templates** – Styled using Tailwind CSS
-- 🤖 **AI Integration** – Gemini API improves CV content for better impact
-- 📱 **Responsive UI** – Works seamlessly across devices
-- 📝 **Last Minute Ready** – Specially designed for students who need a fast solution
+- 👁️ **Live Preview** – Real-time preview of all changes made
+- 🎨 **Multiple Templates** – Choose from Classic and Minimalist designs
+- 🤖 **AI-Powered Text Improvement** – Context-aware AI suggestions for:
+  - **Personal Summaries** – Crafts compelling professional summaries
+  - **Work Experience** – Highlights achievements and impact
+  - **Project Descriptions** – Showcases technical skills and outcomes
+- 📱 **Responsive UI** – Works seamlessly across all devices
+- 💾 **PDF Export** – Download your resume instantly
+- 🎯 **ATS-Friendly** – Optimized for applicant tracking systems
+- 📝 **Last Minute Ready** – Perfect for students and professionals who need a fast solution
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js
+- **Framework:** Next.js 15 with Turbopack
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
-- **AI Integration:** Google Gemini API
-- **Other Tools:** ShadCN UI, React, Netlify (deployment)
+- **UI Components:** ShadCN UI, Radix UI
+- **AI Integration:** OpenRouter AI API (LLaMA 3.2)
+- **PDF Generation:** jsPDF, html2canvas
+- **State Management:** Zustand
+- **Deployment:** Netlify
 
 ---
 
@@ -56,10 +65,12 @@ BuildMyCV allows users to:
     ```
 
 3.  **Set up environment variables**
-    Create a `.env.local` file and add your Gemini API key:
+    Create a `.env.local` file and add your OpenRouter API key:
     ```bash
-    GEMINI_API_KEY=your_api_key_here
+    OPENROUTER_API_KEY=your_openrouter_api_key_here
     ```
+    
+    Get your API key from [OpenRouter.ai](https://openrouter.ai/)
 
 4.  **Run the development server**
     ```bash
