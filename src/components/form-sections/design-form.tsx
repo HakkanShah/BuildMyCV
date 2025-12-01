@@ -35,6 +35,7 @@ export function DesignForm({ settings, updateSettings }: DesignFormProps) {
                         <button
                             key={color.value}
                             onClick={() => updateSettings("themeColor", color.value)}
+                            title={color.name}
                             className={cn(
                                 "w-10 h-10 rounded-full transition-all duration-200 ring-2 ring-offset-2",
                                 color.class,
@@ -65,12 +66,12 @@ export function DesignForm({ settings, updateSettings }: DesignFormProps) {
                             <Label
                                 htmlFor={`font-${font.value}`}
                                 className={cn(
-                                    "flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer h-full",
+                                    "flex flex-col items-center justify-between rounded-xl border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer h-full transition-all",
                                     font.class
                                 )}
                             >
-                                <span className="text-xl">Aa</span>
-                                <span className="mt-2 text-sm font-medium">{font.name}</span>
+                                <span className="text-3xl mb-2">Aa</span>
+                                <span className="text-sm font-medium">{font.name}</span>
                             </Label>
                         </div>
                     ))}

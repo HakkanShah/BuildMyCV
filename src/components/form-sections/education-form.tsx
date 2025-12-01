@@ -37,16 +37,22 @@ export default function EducationForm({
   return (
     <div className="space-y-6">
       {education.length === 0 && (
-        <div className="text-center py-12 border-2 border-dashed rounded-xl bg-muted/30">
-          <p className="text-muted-foreground mb-4">No education added yet.</p>
-          <Button variant="outline" onClick={addEducation}>
-            <PlusCircle className="mr-2 h-4 w-4" /> Add Education
+        <div className="text-center py-12 border-2 border-dashed rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+          <div className="flex justify-center mb-4">
+            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <PlusCircle className="h-6 w-6 text-primary" />
+            </div>
+          </div>
+          <h3 className="text-lg font-medium mb-1">No education added</h3>
+          <p className="text-muted-foreground mb-4 text-sm max-w-xs mx-auto">Add your educational background to showcase your academic achievements.</p>
+          <Button onClick={addEducation}>
+            Add Education
           </Button>
         </div>
       )}
 
       {education.map((edu, index) => (
-        <div key={edu.id} className="p-6 border rounded-xl relative space-y-6 bg-card shadow-sm animate-fade-in group">
+        <div key={edu.id} className="p-6 border rounded-xl relative space-y-6 bg-card shadow-sm animate-fade-in group hover:shadow-md transition-shadow">
           <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
             {reorderEducation && (
               <>
@@ -85,22 +91,45 @@ export default function EducationForm({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor={`institution-${edu.id}`}>Institution</Label>
-              <Input id={`institution-${edu.id}`} value={edu.institution} onChange={(e) => updateEducation(edu.id, 'institution', e.target.value)} placeholder="e.g. Harvard University" />
+              <Label htmlFor={`institution-${edu.id}`}>Institution <span className="text-red-500">*</span></Label>
+              <Input
+                id={`institution-${edu.id}`}
+                value={edu.institution}
+                onChange={(e) => updateEducation(edu.id, 'institution', e.target.value)}
+                placeholder="e.g. Harvard University"
+                className={!edu.institution ? "border-amber-200 focus-visible:ring-amber-200" : ""}
+              />
             </div>
             <div className="space-y-2">
-              <Label htmlFor={`degree-${edu.id}`}>Degree</Label>
-              <Input id={`degree-${edu.id}`} value={edu.degree} onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)} placeholder="e.g. Bachelor of Science" />
+              <Label htmlFor={`degree-${edu.id}`}>Degree <span className="text-red-500">*</span></Label>
+              <Input
+                id={`degree-${edu.id}`}
+                value={edu.degree}
+                onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
+                placeholder="e.g. Bachelor of Science"
+                className={!edu.degree ? "border-amber-200 focus-visible:ring-amber-200" : ""}
+              />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor={`start-date-${edu.id}`}>Start Date</Label>
-              <Input id={`start-date-${edu.id}`} value={edu.startDate} onChange={(e) => updateEducation(edu.id, 'startDate', e.target.value)} placeholder="e.g. 2016" />
+              <Input
+                id={`start-date-${edu.id}`}
+                type="month"
+                value={edu.startDate}
+                onChange={(e) => updateEducation(edu.id, 'startDate', e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor={`end-date-${edu.id}`}>End Date</Label>
-              <Input id={`end-date-${edu.id}`} value={edu.endDate} onChange={(e) => updateEducation(edu.id, 'endDate', e.target.value)} placeholder="e.g. 2020" />
+              <Input
+                id={`end-date-${edu.id}`}
+                type="month"
+                value={edu.endDate}
+                onChange={(e) => updateEducation(edu.id, 'endDate', e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">Leave empty if currently studying</p>
             </div>
           </div>
           <div className="space-y-2">
@@ -116,7 +145,7 @@ export default function EducationForm({
       ))}
 
       {education.length > 0 && (
-        <Button variant="outline" onClick={addEducation} className="w-full py-6 border-dashed">
+        <Button variant="outline" onClick={addEducation} className="w-full py-6 border-dashed hover:bg-muted/50">
           <PlusCircle className="mr-2 h-4 w-4" /> Add Another Education
         </Button>
       )}
