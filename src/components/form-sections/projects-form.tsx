@@ -126,6 +126,7 @@ export default function ProjectsForm({
               value={proj.description}
               onChange={(e) => updateProject(proj.id, 'description', e.target.value)}
               placeholder="Describe the project and technologies used..."
+              context="project"
             />
             <p className="text-xs text-muted-foreground text-right">{countWords(proj.description)} words</p>
           </div>

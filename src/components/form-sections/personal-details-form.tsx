@@ -3,7 +3,7 @@
 import type { PersonalDetails } from '@/lib/types';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { RichTextarea } from '@/components/ui/rich-textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '../ui/button';
 import { Trash2, User } from 'lucide-react';
@@ -110,7 +110,7 @@ export default function PersonalDetailsForm({ personal, updatePersonal }: Person
       </div>
       <div>
         <Label htmlFor="summary">Summary</Label>
-        <Textarea id="summary" value={personal.summary} onChange={(e) => updatePersonal('summary', e.target.value)} placeholder="Tell us about yourself" />
+        <RichTextarea id="summary" value={personal.summary} onChange={(e) => updatePersonal('summary', e.target.value)} placeholder="Tell us about yourself" context="personal" />
         <p className="text-xs text-muted-foreground text-right mt-1">{countWords(personal.summary)} words</p>
       </div>
     </div>
